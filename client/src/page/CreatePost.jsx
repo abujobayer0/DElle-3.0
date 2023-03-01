@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import toast, { Toaster } from "react-hot-toast";
 import { preview } from "../assets";
 import { getRandomPrompt } from "../utils";
 import { FormField, Loader } from "../components";
@@ -48,6 +48,7 @@ const CreatePost = () => {
         alert(err);
       } finally {
         setGeneratingImg(false);
+        toast.success("Successfully Generated!");
       }
     } else {
       alert("Please provide proper prompt");
@@ -72,7 +73,8 @@ const CreatePost = () => {
         );
 
         await response.json();
-        alert("Success");
+        toast.success("Successfully added to Community!");
+        alert("success");
         navigate("/");
       } catch (err) {
         alert(err);
@@ -86,6 +88,7 @@ const CreatePost = () => {
 
   return (
     <section className="max-w-7xl mx-auto">
+      <Toaster position="top-center" reverseOrder={false} />
       <div>
         <h1 className="font-extrabold text-[#222328] text-[32px]">Create</h1>
         <p className="mt-2 text-[#666e75] text-[14px] max-w-[500px]">
